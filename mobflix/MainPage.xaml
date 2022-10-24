@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="mobflix.MainPage">
+
+    <Grid >
+        <ScrollView BackgroundColor="Black">
+            
+            <VerticalStackLayout>
+                
+                <!--Nome do aplicativo-->
+                <Label
+                    Text="MOBFLIX"
+                    TextColor="#2478DF"
+                    SemanticProperties.HeadingLevel="Level1"
+                    FontSize="32"
+                    HorizontalTextAlignment="Center"
+                    FontFamily="BebasNeueRegular" />
+                
+                <!--Destaque tela principal-->
+                <Grid>
+                    <StackLayout Margin="0,10,0,0">
+                        <Image Source="banner.png" Aspect="Fill" />
+                    </StackLayout>
+                    <StackLayout VerticalOptions="End">
+                        <Button 
+                            Text="Assista Agora" 
+                            CornerRadius="8" 
+                            FontFamily="Roboto"
+                            FontSize="15"
+                            WidthRequest="128"
+                            HeightRequest="42"
+                            Margin="0, 0, 0, 10"
+                            BackgroundColor="#2478DF" />
+                    </StackLayout>
+                </Grid>
+                                      
+                <!--Lista de Categorias-->
+                <Grid>
+                    <ScrollView Orientation="Horizontal">
+                    <HorizontalStackLayout>
+                        <Button 
+                            Text="Front End" 
+                            CornerRadius="12" 
+                            FontFamily="Roboto"
+                            FontSize="16"
+                            WidthRequest="128"
+                            HeightRequest="37"
+                            Margin="20, 20, 0, 0"
+                            Padding="0,0,0,0"
+                            BackgroundColor="#5781EF" />
+                        <Button 
+                            Text="Programação" 
+                            CornerRadius="12" 
+                            FontFamily="Roboto"
+                            FontSize="16"
+                            WidthRequest="128"
+                            HeightRequest="37"
+                            Margin="20, 20, 0, 0"
+                            Padding="0,0,0,0"
+                            BackgroundColor="#19940F" />
+                        <Button 
+                            Text="Mobile" 
+                            CornerRadius="12" 
+                            FontFamily="Roboto"
+                            FontSize="16"
+                            WidthRequest="128"
+                            HeightRequest="37"
+                            Margin="20, 20, 0, 0"
+                            Padding="0,0,0,0"
+                            BackgroundColor="#D82D2D" />
+                    </HorizontalStackLayout>
+                    </ScrollView>
+                </Grid>
+                
+                <!--Apresentação dos videos-->
+
+                <Grid>
+                    <StackLayout >
+                        <Button 
+                            Text="Mobile" 
+                            CornerRadius="12" 
+                            FontFamily="Roboto"
+                            FontSize="16"
+                            WidthRequest="128"
+                            HeightRequest="37"
+                            Margin="20, 20, 0, 20"
+                            Padding="0,0,0,0"
+                            HorizontalOptions="Start"
+                            BackgroundColor="#D82D2D" />
+                        <Image Source="card1.png"  />
+                    </StackLayout>
+                </Grid>
+                <Grid>
+                    <StackLayout >
+                        <Button 
+                            Text="Mobile" 
+                            CornerRadius="12" 
+                            FontFamily="Roboto"
+                            FontSize="16"
+                            WidthRequest="128"
+                            HeightRequest="37"
+                            Margin="20, 20, 0, 20"
+                            Padding="0,0,0,0"
+                            HorizontalOptions="Start"
+                            BackgroundColor="#D82D2D" />
+                        <Image Source="card2.png" />
+                    </StackLayout>
+                </Grid>
+                <Grid>
+                    <StackLayout >
+                        <Button 
+                            Text="Mobile" 
+                            CornerRadius="12" 
+                            FontFamily="Roboto"
+                            FontSize="16"
+                            WidthRequest="128"
+                            HeightRequest="37"
+                            Margin="20, 20, 0, 20"
+                            Padding="0,0,0,0"
+                            HorizontalOptions="Start"
+                            BackgroundColor="#D82D2D" />
+                        <Image Source="card3.png"  />
+                    </StackLayout>
+                </Grid>
+            </VerticalStackLayout>
+        </ScrollView>
+        
+        <!--Botão adicionar video-->
+        <VerticalStackLayout HorizontalOptions="End"
+                            VerticalOptions="End"
+                            Padding="10"
+                            Margin="0, 0, 30, 30" >
+
+            <Button x:Name="AdicionarVideo"   
+                Text="+"
+                FontFamily="Regular"
+                FontSize="Title"
+                HeightRequest="52"
+                WidthRequest="52"
+                CornerRadius="52"   
+                Clicked="AdicionarVideo_Clicked"
+                BackgroundColor="#7B61FF" />
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>
