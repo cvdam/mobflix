@@ -7,14 +7,14 @@ namespace mobflix;
 public partial class MainPage : ContentPage
 {
 
-    ObservableCollection<Video> videos;
-    ObservableCollection<Category> categories;
+    private ObservableCollection<Video> videos;
+    private ObservableCollection<Category> categories;
    
 	public MainPage()
 	{
 		InitializeComponent();
 
-        //Mocks to populate Listviews
+        //Mocks to populate CollectionViews
 
         videos = new ObservableCollection<Video>()
         {
