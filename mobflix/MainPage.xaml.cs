@@ -1,43 +1,50 @@
 ﻿
+using Java.Net;
 using mobflix.Model;
 using System.Collections.ObjectModel;
+using System.IO;
+using static Android.Provider.MediaStore;
+using System.Runtime.Serialization;
+using System.Text.Json;
+using Android.Media;
+using mobflix.Service;
 
 namespace mobflix;
 
 public partial class MainPage : ContentPage
 {
 
-    private ObservableCollection<Video> videos;
-    private ObservableCollection<Category> categories;
-   
-	public MainPage()
-	{
-		InitializeComponent();
+    private ObservableCollection<MBVideo> videos;
+    private ObservableCollection<MBCategory> categories;
 
-        //Mocks to populate CollectionViews
 
-        videos = new ObservableCollection<Video>()
+    public MainPage()
+    {
+        InitializeComponent();
+
+        MBVideo mbVideo = VideoServiceMock.RefreshMBVideos();
+        videos = new ObservableCollection<MBVideo>(mbVideo.videoList as List<MBVideo>);
+        foreach(MBVideo mbvideo in videos)
         {
-            new Video { Name = "Mobile", Card = "card1.png", ButtonColor = Color.FromArgb("#D82D2D") },
-            new Video { Name = "Mobile", Card = "card2.png", ButtonColor = Color.FromArgb("#D82D2D") },
-            new Video { Name = "Mobile", Card = "card3.png", ButtonColor = Color.FromArgb("#D82D2D") }
-        };
-
+            mbvideo.ButtonColor = Color.FromArgb(mbvideo.ButtonColorCode);
+        }
         VideoList.ItemsSource = videos;
 
-        categories = new ObservableCollection<Category>()
+        MBCategory mbCategory = CategoryServiceMock.RefreshMBCategories();
+        categories = new ObservableCollection<MBCategory>(mbCategory.categoryList as List<MBCategory>);
+        foreach (MBCategory category in categories)
         {
-            new Category { Name = "Front end", ButtonColor = Color.FromArgb("#5781EF") },
-            new Category { Name = "programação", ButtonColor = Color.FromArgb("#19940F") },
-            new Category { Name = "Mobile", ButtonColor = Color.FromArgb("#D82D2D") }
-        };
-
+            category.ButtonColor = Color.FromArgb(category.ButtonColorCode);
+        }
         CategoryList.ItemsSource = categories;
     }
 
-    private async void AdicionarVideo_Clicked(object sender, EventArgs e)
+    private async void AddVideo_Clicked(object sender, EventArgs e)
     {
-        await DisplayAlert("Alerta", "Add new video", "OK");
+        // await DisplayAlert("Alerta", "Add new video", "OK");
+        await Navigation.PushAsync(new NewVideo());
     }
+
+
 }
 

@@ -1,4 +1,10 @@
-﻿namespace mobflix;
+﻿using mobflix.Model;
+using mobflix.Service;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Text.Json;
+
+namespace mobflix;
 
 public partial class App : Application
 {
@@ -6,6 +12,10 @@ public partial class App : Application
 	{
 		InitializeComponent();
 
-		MainPage = new AppShell();
+		VideoServiceMock.InitMockData();
+		CategoryServiceMock.InitMockData();
+
+        MainPage = new AppShell();
+		
 	}
 }

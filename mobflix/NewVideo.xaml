@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="mobflix.NewVideo"
+             BackgroundColor="Black"
+             Title=" ">
+    <VerticalStackLayout>
+        <Label 
+            VerticalOptions="Center"
+            HorizontalOptions="Center"
+            TextColor="White"
+            FontSize="30"
+            Margin="20,0,0,20"
+            Text="Add new video" />
+        
+        <Label 
+            TextColor="White"
+            FontSize="18"
+            Margin="20,0,0,5"
+            Text="URL" />
+
+        <Entry x:Name="urlEntry" 
+               BackgroundColor="#2478DF" 
+               TextColor="White"
+               HorizontalOptions="Start"
+               Margin="20,0,0,20"
+               WidthRequest="318" />
+
+        <Label 
+            TextColor="White"
+            FontSize="18"
+            Margin="20,0,0,5"
+            Text="Category" />
+
+        <Picker x:Name="CategoryList"
+            ItemsSource="{Binding categories}" 
+            ItemDisplayBinding="{Binding Name}"
+            SelectedItem="{Binding Name}"
+            WidthRequest="318"
+            Margin="20,0,0,20"
+            VerticalTextAlignment="Center"
+            HorizontalOptions="Start"
+            BackgroundColor="#2478DF" 
+            SelectedIndexChanged="OnSelectedIndexChanged_CategoryList"
+            TextColor="White" />
+
+        <Label 
+            TextColor="White"
+            FontSize="30"
+            Margin="20,0,0,20"
+            Text="Preview" />
+
+        <Image Source="preview.png" 
+               Margin="10,0,0,20"/>
+
+        <Button x:Name="AddNewVideo"   
+                Text="Add"
+                FontFamily="Regular"
+                FontSize="Title"
+                HeightRequest="48"
+                WidthRequest="318"
+                CornerRadius="8"   
+                Clicked="AddNewVideo_Clicked"
+                BackgroundColor="#2478DF" />
+            
+
+    </VerticalStackLayout>
+</ContentPage>
