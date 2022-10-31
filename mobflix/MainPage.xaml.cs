@@ -22,7 +22,7 @@ public partial class MainPage : ContentPage
     {
         InitializeComponent();
 
-        MBVideo mbVideo = VideoServiceMock.RefreshMBVideos();
+        MBVideo mbVideo = (MBVideo)ServiceMock.RefreshMBData<MBVideo>("videos");
         videos = new ObservableCollection<MBVideo>(mbVideo.videoList as List<MBVideo>);
         foreach(MBVideo mbvideo in videos)
         {
@@ -30,13 +30,14 @@ public partial class MainPage : ContentPage
         }
         VideoList.ItemsSource = videos;
 
-        MBCategory mbCategory = CategoryServiceMock.RefreshMBCategories();
+        MBCategory mbCategory = (MBCategory)ServiceMock.RefreshMBData<MBCategory>("categories");
         categories = new ObservableCollection<MBCategory>(mbCategory.categoryList as List<MBCategory>);
         foreach (MBCategory category in categories)
         {
             category.ButtonColor = Color.FromArgb(category.ButtonColorCode);
         }
         CategoryList.ItemsSource = categories;
+
     }
 
     private async void AddVideo_Clicked(object sender, EventArgs e)

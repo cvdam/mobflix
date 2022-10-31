@@ -12,7 +12,7 @@ namespace mobflix.Model
     [Serializable]
     public  class MBVideo
     { 
-        public string id { get; set; }
+        public int id { get; set; }
         public  Color ButtonColor { get; set; }
         public string ButtonColorCode { get; set; }
         public  string Url { get; set; }

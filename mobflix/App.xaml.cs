@@ -12,8 +12,7 @@ public partial class App : Application
 	{
 		InitializeComponent();
 
-		VideoServiceMock.InitMockData();
-		CategoryServiceMock.InitMockData();
+		ServiceMock.InitMockData();
 
         MainPage = new AppShell();
 		

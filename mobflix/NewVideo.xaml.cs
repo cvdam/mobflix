@@ -15,18 +15,18 @@ public partial class NewVideo : ContentPage
     {
 		InitializeComponent();
 
-        MBCategory mbcategories = new MBCategory();
-        mbcategories = CategoryServiceMock.RefreshMBCategories();
-
+        MBCategory mbcategories = (MBCategory)ServiceMock.RefreshMBData<MBCategory>("categories");
         CategoryList.ItemsSource = mbcategories.categoryList;
     }
 
 	private async void AddNewVideo_Clicked(object sender, EventArgs e)
 	{
 
-        MBVideo mbVideo = VideoServiceMock.RefreshMBVideos();
-        mbVideo.videoList.Add(new MBVideo { Category = mbCategorySelected.Name, Url = urlEntry.Text, ButtonColorCode = mbCategorySelected.ButtonColorCode });
-        VideoServiceMock.CreateMBVideoItem(mbVideo);
+        MBVideo mbVideo = (MBVideo)ServiceMock.RefreshMBData<MBVideo>("videos");
+        int videoid = mbVideo.videoList.LastOrDefault().id + 1;
+
+        mbVideo.videoList.Add(new MBVideo { id = videoid ,Category = mbCategorySelected.Name, Url = urlEntry.Text, ButtonColorCode = mbCategorySelected.ButtonColorCode }); ; ; ; ;
+        ServiceMock.CreateMBItem(mbVideo,"videos");
 
         await Navigation.PushAsync(new MainPage());
     }

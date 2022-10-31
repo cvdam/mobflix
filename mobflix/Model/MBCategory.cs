@@ -9,7 +9,7 @@ namespace mobflix.Model
     [Serializable]
     public class MBCategory
     {
-        public string id { get; set; }
+        public int id { get; set; }
         public string Name { get; set; }
         public Color ButtonColor { get; set; }
         public string ButtonColorCode { get; set; }
