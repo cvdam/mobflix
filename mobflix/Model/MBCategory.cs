@@ -19,5 +19,6 @@ namespace mobflix.Model
         {
             categoryList = new List<MBCategory>();
         }
+
     }
 }

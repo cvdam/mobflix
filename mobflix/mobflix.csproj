@@ -49,6 +49,15 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="UpdateVideo.xaml.cs">
+	    <DependentUpon>UpdateVideo.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="UpdateVideo.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="NewVideo.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

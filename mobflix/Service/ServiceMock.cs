@@ -1,4 +1,5 @@
 ﻿using mobflix.Model;
+using mobflix.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,29 +15,16 @@ namespace mobflix.Service
 
         public static Object RefreshMBData<T>(string fileType)
         {
+
             targetFile = System.IO.Path.Combine(FileSystem.Current.AppDataDirectory, fileType);
             return CommonServiceMock.readData<T>(targetFile);
         }
 
-        public static void CreateMBItem(Object mbObj, string fileType)
+        public static void UpdateMBData(Object mbObj, string fileType)
         {
             targetFile = System.IO.Path.Combine(FileSystem.Current.AppDataDirectory, fileType);
+            File.Delete(targetFile);
             CommonServiceMock.writeData(targetFile, mbObj);
-        }
-
-        //public static Object RefreshMBVideoItem(int idValue, string fileType, Object mbObj)
-        //{
-
-        //}
-
-        public static void UpdateMBVideoItem(MBVideo videoValue)
-        {
-
-        }
-
-        public static void DeleteMBVideo(int idValue)
-        {
-
         }
 
         public static void InitMockData()

@@ -21,12 +21,16 @@ public partial class NewVideo : ContentPage
 
 	private async void AddNewVideo_Clicked(object sender, EventArgs e)
 	{
+        int videoid = 0;
 
         MBVideo mbVideo = (MBVideo)ServiceMock.RefreshMBData<MBVideo>("videos");
-        int videoid = mbVideo.videoList.LastOrDefault().id + 1;
+        if (mbVideo.videoList.Count > 0)
+        {
+            videoid = mbVideo.videoList.LastOrDefault().id + 1;
+        }
 
         mbVideo.videoList.Add(new MBVideo { id = videoid ,Category = mbCategorySelected.Name, Url = urlEntry.Text, ButtonColorCode = mbCategorySelected.ButtonColorCode }); ; ; ; ;
-        ServiceMock.CreateMBItem(mbVideo,"videos");
+        ServiceMock.UpdateMBData(mbVideo,"videos");
 
         await Navigation.PushAsync(new MainPage());
     }

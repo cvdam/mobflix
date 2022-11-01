@@ -2,7 +2,23 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="mobflix.MainPage">
-
+    <ContentPage.Resources>
+        <Style TargetType="Grid">
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal" />
+                        <VisualState x:Name="Selected">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor"
+                                        Value="Black" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+    </ContentPage.Resources>
     <Grid >
         <ScrollView BackgroundColor="Black">
 
@@ -60,12 +76,16 @@
                 </Grid>
 
                 <!--Videos presentation -->
-                <CollectionView x:Name="VideoList" ItemsSource="{Binding videos}" >
+                <CollectionView x:Name="VideoList" ItemsSource="{Binding videos}"                
+                                SelectionMode="Single"
+                                SelectionChanged="OnCollectionViewSelectionChanged" >
+                    
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <Grid>
                                 <StackLayout>
                                     <Button 
+                                        x:Name="BtnPresentation"
                                         Text="{Binding Category}" 
                                         CornerRadius="12" 
                                         FontFamily="Roboto"
@@ -77,8 +97,10 @@
                                         HorizontalOptions="Start"
                                         BackgroundColor="{Binding ButtonColor}" />
 
-                                    <Image Source="{Binding Url}" />
+                                    <ImageButton x:Name="ImageVideoPreview"  Source="{Binding Url}" Clicked="ImageVideoPreview_Clicked" />
+                                    <Label x:Name="videoId" Text="{Binding id}" IsVisible="False" />
                                 </StackLayout>
+
                             </Grid>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>

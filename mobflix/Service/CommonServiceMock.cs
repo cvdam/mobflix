@@ -29,7 +29,5 @@ namespace mobflix.Service
             streamWriter.Write(mb);
             streamWriter.Close();
         }
-
-
     }
 }
