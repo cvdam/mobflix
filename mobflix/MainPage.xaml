@@ -1,6 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ViewModels="clr-namespace:mobflix.ViewModel"
+             x:DataType="ViewModels:MainViewModel"
              x:Class="mobflix.MainPage">
     <ContentPage.Resources>
         <Style TargetType="Grid">
@@ -55,7 +57,7 @@
                 <Grid>
                     <ScrollView Orientation="Horizontal">
                         <HorizontalStackLayout>
-                            <CollectionView x:Name="CategoryList" ItemsSource="{Binding categories}" ItemsLayout="HorizontalList" >
+                            <CollectionView x:Name="CategoryList" ItemsSource="{Binding Obcategories}" ItemsLayout="HorizontalList" >
                                 <CollectionView.ItemTemplate>
                                     <DataTemplate>
                                         <Button 
@@ -76,10 +78,10 @@
                 </Grid>
 
                 <!--Videos presentation -->
-                <CollectionView x:Name="VideoList" ItemsSource="{Binding videos}"                
+                <CollectionView x:Name="VideoList" ItemsSource="{Binding Obvideos}"                
                                 SelectionMode="Single"
-                                SelectionChanged="OnCollectionViewSelectionChanged" >
-                    
+                                SelectedItem="{Binding VideoSelecionado}" >
+
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <Grid>
@@ -97,8 +99,8 @@
                                         HorizontalOptions="Start"
                                         BackgroundColor="{Binding ButtonColor}" />
 
-                                    <ImageButton x:Name="ImageVideoPreview"  Source="{Binding Url}" Clicked="ImageVideoPreview_Clicked" />
-                                    <Label x:Name="videoId" Text="{Binding id}" IsVisible="False" />
+                                    <ImageButton x:Name="ImageVideoPreview"  Source="{Binding Url}"  />
+                                    <Label x:Name="videoId" Text="{Binding Id}" IsVisible="False" />
                                 </StackLayout>
 
                             </Grid>
@@ -122,7 +124,7 @@
                 HeightRequest="52"
                 WidthRequest="52"
                 CornerRadius="52"   
-                Clicked="AddVideo_Clicked"
+                Command="{Binding AddNewVideoCommand}"
                 BackgroundColor="#7B61FF" />
         </VerticalStackLayout>
     </Grid>

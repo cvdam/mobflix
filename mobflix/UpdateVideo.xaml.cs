@@ -3,51 +3,36 @@ using mobflix.Model;
 using System.Collections.ObjectModel;
 using System.Text.Json;
 using mobflix.Service;
+using mobflix.ViewModel;
 
 namespace mobflix;
+
 
 public partial class UpdateVideo : ContentPage
 {
     private MBCategory mbCategorySelected;
 
-    public UpdateVideo(MBVideo video)
+    public UpdateVideo(MBVideo mbVideo)
     {
 		InitializeComponent();
-
-        MBCategory mbcategories = (MBCategory)ServiceMock.RefreshMBData<MBCategory>("categories");
-        CategoryList.ItemsSource = mbcategories.categoryList;
-
-        urlEntry.Text = video.Url;
-        CategoryList.SelectedItem = video;
-        videoId.Text  = video.id.ToString();
+        BindingContext = new UpdateVideoViewModel(mbVideo);
+      
      }
 
-	private async void UpdateVideoInfo_Clicked(object sender, EventArgs e)
-	{
-        MBVideo mbVideo = (MBVideo)ServiceMock.RefreshMBData<MBVideo>("videos");
-        int videoIndex = mbVideo.videoList.FindIndex(v => v.id == int.Parse(videoId.Text));
-
-        MBCategory mbcategories = (MBCategory)ServiceMock.RefreshMBData<MBCategory>("categories");
-        int categoryIndex = mbcategories.categoryList.FindIndex(c => c.Name == mbCategorySelected.Name);
-
-        mbVideo.videoList[videoIndex].Url = urlEntry.Text;
-        mbVideo.videoList[videoIndex].Category = mbCategorySelected.Name;
-        mbVideo.videoList[videoIndex].ButtonColor = mbcategories.categoryList[categoryIndex].ButtonColor;
-        mbVideo.videoList[videoIndex].ButtonColorCode = mbcategories.categoryList[categoryIndex].ButtonColorCode;
-
-        ServiceMock.UpdateMBData(mbVideo, "videos");
-
-        await Navigation.PushAsync(new MainPage());
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        MessagingCenter.Subscribe<MBVideo>(this, "UpdateVideoSelecionado",
+            (msg) =>
+            {
+                Navigation.PushAsync(new MainPage());
+            });
     }
 
-    private async void DeleteVideoInfo_Clicked(object sender, EventArgs e)
+    protected override void OnDisappearing()
     {
-        MBVideo mbVideo = (MBVideo)ServiceMock.RefreshMBData<MBVideo>("videos");
-        var videoToRemove = mbVideo.videoList.Single(v => v.id == int.Parse(videoId.Text));
-        mbVideo.videoList.Remove(videoToRemove);
-
-        ServiceMock.UpdateMBData(mbVideo, "videos");
-        await Navigation.PushAsync(new MainPage());
+        base.OnDisappearing();
+        MessagingCenter.Unsubscribe<MBVideo>(this, "UpdateVideoSelecionado");
     }
 
     private void OnSelectedIndexChanged_CategoryList(object sender, EventArgs e)

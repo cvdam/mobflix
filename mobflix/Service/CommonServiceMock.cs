@@ -1,13 +1,10 @@
-﻿using Android.Database.Sqlite;
-using Kotlin.Reflect;
-using mobflix.Model;
+﻿using mobflix.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
-using static Android.Provider.MediaStore;
 
 namespace mobflix.Service
 {

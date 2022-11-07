@@ -1,38 +1,36 @@
 
 using mobflix.Model;
 using System.Collections.ObjectModel;
-using static Android.Provider.MediaStore;
 using System.Text.Json;
 using mobflix.Service;
+using mobflix.ViewModel;
+
 
 namespace mobflix;
 
 public partial class NewVideo : ContentPage
 {
     private MBCategory mbCategorySelected;
-
     public NewVideo()
     {
 		InitializeComponent();
-
-        MBCategory mbcategories = (MBCategory)ServiceMock.RefreshMBData<MBCategory>("categories");
-        CategoryList.ItemsSource = mbcategories.categoryList;
+        BindingContext = new NewVideoViewModel();
     }
 
-	private async void AddNewVideo_Clicked(object sender, EventArgs e)
-	{
-        int videoid = 0;
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        MessagingCenter.Subscribe<NewVideoViewModel>(this, "CreateNewVideo",
+            (msg) =>
+            {
+                Navigation.PushAsync(new MainPage());
+            });
+    }
 
-        MBVideo mbVideo = (MBVideo)ServiceMock.RefreshMBData<MBVideo>("videos");
-        if (mbVideo.videoList.Count > 0)
-        {
-            videoid = mbVideo.videoList.LastOrDefault().id + 1;
-        }
-
-        mbVideo.videoList.Add(new MBVideo { id = videoid ,Category = mbCategorySelected.Name, Url = urlEntry.Text, ButtonColorCode = mbCategorySelected.ButtonColorCode }); ; ; ; ;
-        ServiceMock.UpdateMBData(mbVideo,"videos");
-
-        await Navigation.PushAsync(new MainPage());
+    protected override void OnDisappearing()
+    {
+        base.OnDisappearing();
+        MessagingCenter.Unsubscribe<NewVideoViewModel>(this, "CreateNewVideo");
     }
 
     private void OnSelectedIndexChanged_CategoryList(object sender, EventArgs e)

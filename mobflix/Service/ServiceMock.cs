@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static Android.Provider.MediaStore;
 
 namespace mobflix.Service
 {
@@ -30,7 +29,7 @@ namespace mobflix.Service
         public static void InitMockData()
         {
             var video = new MBVideo();
-            video.videoList.Add(new MBVideo { id = 1, Category = "Mobile", Url = "card1.png", ButtonColorCode = "#D82D2D" });
+            video.videoList.Add(new MBVideo { id = 1, Category = "Programação", Url = "card1.png", ButtonColorCode = "#19940F" });
             video.videoList.Add(new MBVideo { id = 2, Category = "Mobile", Url = "card2.png", ButtonColorCode = "#D82D2D" });
             video.videoList.Add(new MBVideo { id = 3, Category = "Mobile", Url = "card3.png", ButtonColorCode = "#D82D2D" });
 

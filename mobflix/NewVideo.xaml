@@ -2,6 +2,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="mobflix.NewVideo"
+             xmlns:ViewModels="clr-namespace:mobflix.ViewModel"
+             x:DataType="ViewModels:NewVideoViewModel"
              BackgroundColor="Black"
              Title=" ">
     <VerticalStackLayout>
@@ -20,6 +22,7 @@
             Text="URL" />
 
         <Entry x:Name="urlEntry" 
+               Text="{Binding Url}"
                BackgroundColor="#2478DF" 
                TextColor="White"
                HorizontalOptions="Start"
@@ -33,9 +36,9 @@
             Text="Category" />
 
         <Picker x:Name="CategoryList"
-            ItemsSource="{Binding categories}" 
+            ItemsSource="{Binding Obcategories }" 
             ItemDisplayBinding="{Binding Name}"
-            SelectedItem="{Binding Name}"
+            SelectedItem="{Binding SelectedCategory}"
             WidthRequest="318"
             Margin="20,0,0,20"
             VerticalTextAlignment="Center"
@@ -60,7 +63,7 @@
                 HeightRequest="48"
                 WidthRequest="318"
                 CornerRadius="8"   
-                Clicked="AddNewVideo_Clicked"
+                Command="{ Binding AddNewVideoCommand}"
                 BackgroundColor="#2478DF" />
             
 

@@ -2,6 +2,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="mobflix.UpdateVideo"
+             xmlns:ViewModels="clr-namespace:mobflix.ViewModel"
+             x:DataType="ViewModels:UpdateVideoViewModel"
              BackgroundColor="Black"
              Title=" ">
     <VerticalStackLayout>
@@ -13,7 +15,7 @@
             FontSize="30"
             Margin="20,0,0,20"
             Text="Update video" />
-        <Label x:Name="videoId" Text="{Binding id}" IsVisible="False" TextColor="White" FontSize="20"/>
+        <Label x:Name="videoId" Text="{Binding videoId}" IsVisible="False" TextColor="White" FontSize="20"/>
         <Label 
             TextColor="White"
             FontSize="18"
@@ -21,6 +23,7 @@
             Text="URL" />
 
         <Entry x:Name="urlEntry" 
+               Text="{Binding Url}"
                ClearButtonVisibility="WhileEditing"
                Keyboard="Plain"
                BackgroundColor="#2478DF" 
@@ -36,9 +39,9 @@
             Text="Category" />
 
         <Picker x:Name="CategoryList"
-            ItemsSource="{Binding categories}" 
+            ItemsSource="{Binding Obcategories }" 
             ItemDisplayBinding="{Binding Name}"
-            SelectedItem="{Binding Name}"
+            SelectedItem="{Binding SelectedCategory}"
             WidthRequest="318"
             Margin="20,0,0,20"
             VerticalTextAlignment="Center"
@@ -63,7 +66,7 @@
                 HeightRequest="48"
                 WidthRequest="318"
                 CornerRadius="8"   
-                Clicked="UpdateVideoInfo_Clicked"
+                Command="{Binding UpdateVideoInfoCommand}"
                 BackgroundColor="#2478DF" />
         
         <Button x:Name="DeleteVideoInfo"   
@@ -73,7 +76,7 @@
                 HeightRequest="48"
                 WidthRequest="318"
                 CornerRadius="8"   
-                Clicked="DeleteVideoInfo_Clicked"
+                Command="{Binding DeleteVideoInfoCommand}"
                 BackgroundColor="#2478DF" />
 
 
